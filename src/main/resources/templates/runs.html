@@ -1,0 +1,24 @@
+<h1>Liste des Courses</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Coureur</th>
+        <th>Date</th>
+        <th>Durée</th>
+        <th>Activité Strava</th>
+        <th>Nombre de Tours</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="run : ${runs}">
+        <td><img th:src="@{${run.profilePictureUrl}}"></td>
+        <td th:text="${run.firstName + ' ' + run.lastName}"></td>
+        <td th:text="${run.date}"></td>
+        <td th:text="${run.duration}"></td>
+        <td><a th:href="@{${run.link}}">Ici</a></td>
+        <td th:text="${run.numberOfLaps}"></td>
+
+    </tr>
+    </tbody>
+</table>

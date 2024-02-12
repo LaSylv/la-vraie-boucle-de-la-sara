@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>La vraie boucle de la Sara</title>
+    <!-- Include htmx library -->
+    <script src="/htmx-1.9.10.min.js"></script>
+</head>
+<body>
+<div th:if="${#authorization.expression('isAuthenticated()')}">
+    <p th:text="'Welcome, ' + ${#authentication.principal}"></p>
+</div>
+<div th:if="${!#authorization.expression('isAuthenticated()')}">
+    <a href="/oauth2/authorization/strava">Login with Strava</a>
+</div>
+<h1>La vraie boucle de la Sara</h1>
+<div id="runs" hx-get="/runs" hx-trigger="load"></div>
+
+<div th:if="${#authorization.expression('isAuthenticated()')}" th:insert="~{add-run}"></div>
+
+</body>
+</html>
