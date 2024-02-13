@@ -10,7 +10,7 @@
 </head>
 <body>
 <div th:if="${#authorization.expression('isAuthenticated()')}">
-    <p th:text="'Welcome, ' + ${#authentication.principal}"></p>
+    <p th:text="'Welcome, ' + ${#authentication.principal.attributes.firstname}"></p>
 </div>
 <div th:if="${!#authorization.expression('isAuthenticated()')}">
     <a href="/oauth2/authorization/strava">Login with Strava</a>

@@ -64,9 +64,14 @@ public class StravaApiService {
     private String extractId(String urlOrId) {
         // TODO handle errors
         // https://www.strava.com/activities/10733645107
-        String activityId = Long.parseLong(urlOrId.replaceAll(WWW_STRAVA_COM_ACTIVITIES, "")) + "";
-        if (urlOrId.startsWith(WWW_STRAVA_COM_ACTIVITIES)) {
-            return activityId;
+        String activityId = null;
+        try {
+            activityId = Long.parseLong(urlOrId.replaceAll(WWW_STRAVA_COM_ACTIVITIES, "")) + "";
+            if (urlOrId.startsWith(WWW_STRAVA_COM_ACTIVITIES)) {
+                return activityId;
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidStravaActivity(e, "Impossible de récupérer l'activité Strava à partir de l'url, est-elle bien configuré");
         }
         return activityId;
     }
